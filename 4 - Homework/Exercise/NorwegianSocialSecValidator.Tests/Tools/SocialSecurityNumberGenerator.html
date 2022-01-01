@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+    <!-- Stolen from http://fluffybun.com/wordpress/?page_id=10
+     who definitely stole it from somewhere else because they don't have a
+     clue how javascript works -->
+    <title>SocialSecurityNumberGenerator</title>
+    <script type="text/javascript">
+
+        function initCalculation() {
+            var date = document.getElementById("date").value;
+            var year = document.getElementById("year").value;
+            var amount = document.getElementById("amount").value;
+            var min;
+            var max;
+            if (year == 18) {
+                min = 500;
+                max = 749;
+            } else if (year == 19) {
+                min = 000;
+                max = 400;
+            } else if (year == 20) {
+                min = 500;
+                max = 999;
+            }
+            var both = document.getElementById("both").checked;
+            var male = document.getElementById("male").checked;
+            var female = document.getElementById("female").checked;
+            var showSex = document.getElementById("showSex").checked
+            if ((amount <= 0)
+					|| (date.length != 6)) {
+                alert("Epic fail!");
+                return false;
+            }
+            document.getElementById("output").innerHTML = "";
+            doCalculate(date, amount, min, max, both, female, male, showSex);
+        }
+        function doCalculate(date, amount, min, max, both, female, male, showSex) {
+            if (max - amount < min)
+                return false;
+
+            var x1 = date.substring(0, 1);
+            var x2 = date.substring(1, 2);
+            var x3 = date.substring(2, 3);
+            var x4 = date.substring(3, 4);
+            var x5 = date.substring(4, 5);
+            var x6 = date.substring(5, 6);
+            var found = 0;
+            var i = 0;
+            try {
+                for (i = max - amount; i > min; i++) {
+                    if (found >= amount)
+                        break;
+                    else if (i == min + 1) {
+                        var newDate = increaseDateByOneDay(date);
+                        doCalculate(newDate, amount - found, min, max, both, female, male, showSex);
+                        return true;
+                    }
+                    i += "";
+                    var i1 = i.substring(0, 1);
+                    var i2 = i.substring(1, 2);
+                    var i3 = i.substring(2, 3);
+                    if (!(i3 % 2) && male)
+                        continue;
+                    else if ((i3 % 2) && female)
+                        continue;
+                    var c1 = 11 - ((3 * x1 + 7 * x2 + 6 * x3 + 1 * x4 + 8 * x5 + 9 * x6 + 4 * i1 + 5 * i2 + 2 * i3) % 11);
+                    var c2 = 11 - ((5 * x1 + 4 * x2 + 3 * x3 + 2 * x4 + 7 * x5 + 6 * x6 + 5 * i1 + 4 * i2 + 3 * i3 + 2 * c1) % 11);
+                    if (c1 >= 10 || c2 >= 10) {
+                        continue;
+                    }
+                    found++;
+                    var str = "" + date + i1 + i2 + i3 + c1 + c2;
+                    if (showSex) {
+                        if (i3 % 2)
+                            str += " (Male)";
+                        else
+                            str += " (Female)";
+                    }
+                    str += "<br />";
+                    document.getElementById("output").innerHTML += str;
+                }
+            } catch (err) {
+                alert("Epic fail!");
+                return false;
+            }
+            return true;
+        }
+        function increaseDateByOneDay(date) {
+            var day = date.substring(0, 2);
+            var month = date.substring(2, 4);
+            var year = date.substring(4, 6);
+            day++;
+            if (day > 31) {
+                day = "01";
+                month++;
+                if (month < 10)
+                    month = "0" + month;
+                else if (month > 12) {
+                    month = "01";
+                    year++;
+                }
+            }
+            return "" + day + month + year;
+        }
+    </script>
+
+</head>
+<body>
+    <form action="SocialSecurityNumberGenerator.html">
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr align="left" valign="middle">
+            <td>
+                <div style="width: 100px; float: left;">Date of birth:</div>
+                <input type="text" id="date" size="7" maxlength="6" />
+                (120376)
+            </td>
+        </tr>
+        <tr align="left" valign="middle">
+            <td>
+                <div style="width: 100px; float: left;">Year of birth:</div>
+                <select id="year">
+                    <option value="19">1900-1999</option>
+                    <option value="18">1855-1899</option>
+                    <option value="20">2000-2054</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="left" valign="middle">
+            <td>
+                <div style="width: 100px; float: left;">Quantity:</div>
+                <input type="text" id="amount" value="100" size="6" maxlength="5" />
+                (> 1 & < 249)
+            </td>
+        </tr>
+        <tr align="left" valign="middle">
+            <td>
+                <div style="width: 100px; float: left;">Gender:</div>
+                <input type="radio" name="sex" id="both" checked="checked" />
+                Both
+                <div style="width: 100px; float: left;">
+                    &nbsp;</div>
+                <input type="radio" name="sex" id="male" />
+                Male
+                <div style="width: 100px; float: left;">
+                    &nbsp;</div>
+                <input type="radio" name="sex" id="female" />
+                Female
+            </td>
+        </tr>
+        <tr align="left" valign="middle">
+            <td>
+                <div style="width: 100px; float: left;">
+                    Show gender:</div>
+                <input type="checkbox" id="showSex" checked="checked" />
+                <p>
+                    If the number is higher than about 450, the date of birth issue continuosly increase by one.<br />
+                    It will then be a possibility that some of the birth numbers contains invalid dates. High values, like 1000, will take a long time - up to several minutes.</p>
+            </td>
+        </tr>
+    </table>
+    <input type="button" value="Calculate" onclick="initCalculation();" />
+    <div id="output" style="padding-left: 20px;">
+    </div>
+    </form>
+</body>
+</html>

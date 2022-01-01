@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorwegianSocialSecValidator", "NorwegianSocialSecValidator.csproj", "{011BF5A6-5B2E-45B8-B114-7B5E62BD6228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorwegianSocialSecValidator.Tests", "..\NorwegianSocialSecValidator.Tests\NorwegianSocialSecValidator.Tests.csproj", "{A3D3675A-C0B4-44D9-A83D-67A2E56510E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{011BF5A6-5B2E-45B8-B114-7B5E62BD6228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011BF5A6-5B2E-45B8-B114-7B5E62BD6228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011BF5A6-5B2E-45B8-B114-7B5E62BD6228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011BF5A6-5B2E-45B8-B114-7B5E62BD6228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D3675A-C0B4-44D9-A83D-67A2E56510E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D3675A-C0B4-44D9-A83D-67A2E56510E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D3675A-C0B4-44D9-A83D-67A2E56510E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D3675A-C0B4-44D9-A83D-67A2E56510E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E494936C-D34A-4FEF-80F8-66973A972FBE}
+	EndGlobalSection
+EndGlobal
