@@ -4,7 +4,7 @@
 
 This training is an introduction to TDD that I made for my university science club.
 We will learn how to use some tools and techniques
-for testing applications before start coding through practial exercises.
+for testing applications before coding practial exercises.
 
 ## Content
 ### Test Automation Fundamentals
